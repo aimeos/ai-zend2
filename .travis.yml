@@ -8,5 +8,10 @@ before_script:
   - git clone --depth=50 --branch=master git://github.com/nsendetzky/arcavias-core.git ../arcavias-core
   - cd ../arcavias-core
   - mv ../ai-zend2 ext/
-  - composer update || sleep 60 && composer update
+  - composer require "zendframework/zend-config" "2.3.*"
+  - composer require "zendframework/zend-i18n" "2.3.*"
+  - composer require "zendframework/zend-log" "2.3.*"
+  - composer require "zendframework/zend-mail" "2.3.*"
+  - composer require "zendframework/zend-mvc" "2.3.*"
+  - composer install
 script: "vendor/bin/phing -Ddir=ext/ai-zend2 testext && vendor/bin/phing -Ddir=ext/ai-zend2 checkext"
