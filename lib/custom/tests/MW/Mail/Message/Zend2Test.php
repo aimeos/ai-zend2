@@ -126,7 +126,7 @@ class MW_Mail_Message_Zend2Test extends MW_Unittest_Testcase
 	public function testSetBody()
 	{
 		$result = $this->_object->setBody( 'test' );
-		$mail = $this->_object->getObject();
+		$this->_object->getObject();
 
 		$this->assertSame( $this->_object, $result );
 	}
@@ -135,7 +135,7 @@ class MW_Mail_Message_Zend2Test extends MW_Unittest_Testcase
 	public function testSetBodyHtml()
 	{
 		$result = $this->_object->setBodyHtml( 'test' );
-		$mail = $this->_object->getObject();
+		$this->_object->getObject();
 
 		$this->assertSame( $this->_object, $result );
 	}
@@ -151,7 +151,7 @@ class MW_Mail_Message_Zend2Test extends MW_Unittest_Testcase
 	public function testEmbedAttachment()
 	{
 		$result = $this->_object->embedAttachment( 'test', 'text/plain', 'test.txt' );
-		$mail = $this->_object->getObject();
+		$this->_object->getObject();
 
 		$this->assertInternalType( 'string', $result );
 	}
