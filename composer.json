@@ -2,7 +2,7 @@
 	"name": "aimeos/ai-zend2",
 	"description": "Aimeos extension for utilizing Zend Framework 2 components",
 	"homepage": "http://aimeos.org",
-	"type": "arcavias-extension",
+	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"support": {
 		"source": "https://github.com/aimeos/ai-zend2",
