@@ -2,6 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2014
  */
 
 class TestHelper
@@ -37,7 +38,7 @@ class TestHelper
 			require_once 'Arcavias.php';
 			spl_autoload_register( 'Arcavias::autoload' );
 
-			$extdir = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
+			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
 			self::$_arcavias = new Arcavias( array( $extdir ), false );
 		}
 

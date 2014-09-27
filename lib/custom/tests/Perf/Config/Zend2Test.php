@@ -2,6 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2014
  */
 
 class Perf_Config_Zend2Test extends MW_Unittest_Testcase
