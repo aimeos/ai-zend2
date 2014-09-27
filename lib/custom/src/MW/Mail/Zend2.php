@@ -22,7 +22,7 @@ class MW_Mail_Zend2 implements MW_Mail_Interface
 	/**
 	 * Initializes the instance of the class.
 	 *
-	 * @param Zend_Mail_Transport_Abstract $transport Mail transport object
+	 * @param Zend\Mail\Transport\TransportInterface $transport Mail transport object
 	 */
 	public function __construct( Zend\Mail\Transport\TransportInterface $transport )
 	{

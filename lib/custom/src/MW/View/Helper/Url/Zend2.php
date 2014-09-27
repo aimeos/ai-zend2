@@ -26,7 +26,7 @@ class MW_View_Helper_Url_Zend2
 	 * Initializes the URL view helper.
 	 *
 	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param Zend\Controller\Router\Interface $router Zend Router implementation
+	 * @param Zend\Mvc\Router\RouteInterface $router Zend Router implementation
 	 * @param string $serverUrl Url of the server including scheme, host and port
 	 */
 	public function __construct( $view, \Zend\Mvc\Router\RouteInterface $router, $serverUrl )

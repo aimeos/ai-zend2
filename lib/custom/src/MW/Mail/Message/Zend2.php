@@ -27,7 +27,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	/**
 	 * Initializes the message instance.
 	 *
-	 * @param Zend_Mail $object Zend mail object
+	 * @param Zend\Mail\Message $object Zend mail object
 	 */
 	public function __construct( Zend\Mail\Message $object, $charset = 'UTF-8' )
 	{
