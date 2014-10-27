@@ -24,7 +24,7 @@ class MW_Mail_Zend2Test extends MW_Unittest_Testcase
 			$this->markTestSkipped( 'Zend\Mail\Message is not available' );
 		}
 
-		$this->_mock = $this->getMock( 'Zend\Mail\Transport\Null' );
+		$this->_mock = $this->getMock( 'Zend\Mail\Transport\File' );
 		$this->_object = new MW_Mail_Zend2( $this->_mock );
 	}
 
