@@ -18,4 +18,7 @@ before_script:
   - composer require "zendframework/zend-mvc" "2.3.*"
   - composer install
 
-script: vendor/bin/phing -Ddir=ext/ai-zend2 testext checkext
+script: vendor/bin/phing -Ddir=ext/ai-zend2 coverageext checkext
+
+after_success:
+  - php vendor/bin/coveralls -c ext/ai-zend2/.coveralls.yml
