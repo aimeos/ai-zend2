@@ -1,7 +1,7 @@
 {
 	"name": "aimeos/ai-zend2",
-	"description": "Aimeos extension for utilizing Zend Framework 2 components",
-	"keywords": ["aimeos", "adapter", "zend", "framework"],
+	"description": "Zend Framework 2 adapter for Aimeos web shops and e-commerce solutions",
+	"keywords": ["aimeos", "adapter", "zend", "framework", "shop", "e-commerce"],
 	"homepage": "https://aimeos.org",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
