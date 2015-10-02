@@ -11,7 +11,7 @@
  */
 class MW_Logger_Zend2Test extends MW_Unittest_Testcase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -37,7 +37,7 @@ class MW_Logger_Zend2Test extends MW_Unittest_Testcase
 		$logger = new Zend\Log\Logger();
 		$logger->addWriter( $writer );
 
-		$this->_object = new MW_Logger_Zend2( $logger );
+		$this->object = new MW_Logger_Zend2( $logger );
 	}
 
 
@@ -55,21 +55,21 @@ class MW_Logger_Zend2Test extends MW_Unittest_Testcase
 
 	public function testLog()
 	{
-		$this->_object->log( 'error' );
+		$this->object->log( 'error' );
 		$this->assertEquals( "log: <message> error\n\n", file_get_contents( 'error.log' ) );
 	}
 
 
 	public function testNonScalarLog()
 	{
-		$this->_object->log( array( 'error', 'error2', 2 ) );
+		$this->object->log( array( 'error', 'error2', 2 ) );
 		$this->assertEquals( 'log: <message> ["error","error2",2]' . "\n\n", file_get_contents( 'error.log' ) );
 	}
 
 
 	public function testLogDebug()
 	{
-		$this->_object->log( 'debug', MW_Logger_Abstract::DEBUG );
+		$this->object->log( 'debug', MW_Logger_Abstract::DEBUG );
 		$this->assertEquals( '', file_get_contents( 'error.log' ) );
 	}
 
@@ -77,6 +77,6 @@ class MW_Logger_Zend2Test extends MW_Unittest_Testcase
 	public function testBadPriority()
 	{
 		$this->setExpectedException( 'MW_Logger_Exception' );
-		$this->_object->log( 'error', -1 );
+		$this->object->log( 'error', -1 );
 	}
 }

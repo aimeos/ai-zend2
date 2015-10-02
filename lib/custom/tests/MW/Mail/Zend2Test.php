@@ -8,8 +8,8 @@
 
 class MW_Mail_Zend2Test extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_mock;
+	private $object;
+	private $mock;
 
 
 	/**
@@ -24,8 +24,8 @@ class MW_Mail_Zend2Test extends MW_Unittest_Testcase
 			$this->markTestSkipped( 'Zend\Mail\Message is not available' );
 		}
 
-		$this->_mock = $this->getMock( 'Zend\Mail\Transport\File' );
-		$this->_object = new MW_Mail_Zend2( $this->_mock );
+		$this->mock = $this->getMock( 'Zend\Mail\Transport\File' );
+		$this->object = new MW_Mail_Zend2( $this->mock );
 	}
 
 	/**
@@ -41,16 +41,16 @@ class MW_Mail_Zend2Test extends MW_Unittest_Testcase
 
 	public function testCreateMessage()
 	{
-		$result = $this->_object->createMessage( 'ISO-8859-1' );
+		$result = $this->object->createMessage( 'ISO-8859-1' );
 		$this->assertInstanceOf( 'MW_Mail_Message_Interface', $result );
 	}
 
 
 	public function testSend()
 	{
-		$this->_mock->expects( $this->once() )->method( 'send' );
+		$this->mock->expects( $this->once() )->method( 'send' );
 
-		$this->_object->send( $this->_object->createMessage() );
+		$this->object->send( $this->object->createMessage() );
 	}
 
 }

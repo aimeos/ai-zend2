@@ -8,8 +8,8 @@
 
 class MW_Mail_Message_Zend2Test extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_mock;
+	private $object;
+	private $mock;
 
 
 	/**
@@ -24,8 +24,8 @@ class MW_Mail_Message_Zend2Test extends MW_Unittest_Testcase
 			$this->markTestSkipped( 'Zend\Mail\Message is not available' );
 		}
 
-		$this->_mock = $this->getMock( 'Zend\Mail\Message' );
-		$this->_object = new MW_Mail_Message_Zend2( $this->_mock, 'UTF-8' );
+		$this->mock = $this->getMock( 'Zend\Mail\Message' );
+		$this->object = new MW_Mail_Message_Zend2( $this->mock, 'UTF-8' );
 	}
 
 	/**
@@ -41,51 +41,51 @@ class MW_Mail_Message_Zend2Test extends MW_Unittest_Testcase
 
 	public function testAddFrom()
 	{
-		$this->_mock->expects( $this->once() )->method( 'setFrom' )
+		$this->mock->expects( $this->once() )->method( 'setFrom' )
 			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
 
-		$result = $this->_object->addFrom( 'a@b', 'test' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->addFrom( 'a@b', 'test' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testAddTo()
 	{
-		$this->_mock->expects( $this->once() )->method( 'addTo' )
+		$this->mock->expects( $this->once() )->method( 'addTo' )
 			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
 
-		$result = $this->_object->addTo( 'a@b', 'test' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->addTo( 'a@b', 'test' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testAddCc()
 	{
-		$this->_mock->expects( $this->once() )->method( 'addCc' )
+		$this->mock->expects( $this->once() )->method( 'addCc' )
 			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
 
-		$result = $this->_object->addCc( 'a@b', 'test' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->addCc( 'a@b', 'test' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testAddBcc()
 	{
-		$this->_mock->expects( $this->once() )->method( 'addBcc' )
+		$this->mock->expects( $this->once() )->method( 'addBcc' )
 			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
 
-		$result = $this->_object->addBcc( 'a@b', 'test' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->addBcc( 'a@b', 'test' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testAddReplyTo()
 	{
-		$this->_mock->expects( $this->once() )->method( 'setReplyTo' )
+		$this->mock->expects( $this->once() )->method( 'setReplyTo' )
 			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
 
-		$result = $this->_object->addReplyTo( 'a@b', 'test' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->addReplyTo( 'a@b', 'test' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
@@ -96,63 +96,63 @@ class MW_Mail_Message_Zend2Test extends MW_Unittest_Testcase
 		$mockHeader->expects( $this->once() )->method( 'addHeaderLine' )
 			->with( $this->stringContains( 'test' ), $this->stringContains( 'value' ) );
 
-		$this->_mock->expects( $this->once() )->method( 'getHeaders' )
+		$this->mock->expects( $this->once() )->method( 'getHeaders' )
 			->will( $this->returnValue( $mockHeader ) );
 
-		$result = $this->_object->addHeader( 'test', 'value' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->addHeader( 'test', 'value' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testSetSender()
 	{
-		$this->_mock->expects( $this->once() )->method( 'setFrom' )
+		$this->mock->expects( $this->once() )->method( 'setFrom' )
 			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
 
-		$result = $this->_object->setSender( 'a@b', 'test' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->setSender( 'a@b', 'test' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testSetSubject()
 	{
-		$this->_mock->expects( $this->once() )->method( 'setSubject' )
+		$this->mock->expects( $this->once() )->method( 'setSubject' )
 			->with( $this->stringContains( 'test' ) );
 
-		$result = $this->_object->setSubject( 'test' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->setSubject( 'test' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testSetBody()
 	{
-		$result = $this->_object->setBody( 'test' );
-		$this->_object->getObject();
+		$result = $this->object->setBody( 'test' );
+		$this->object->getObject();
 
-		$this->assertSame( $this->_object, $result );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testSetBodyHtml()
 	{
-		$result = $this->_object->setBodyHtml( 'test' );
-		$this->_object->getObject();
+		$result = $this->object->setBodyHtml( 'test' );
+		$this->object->getObject();
 
-		$this->assertSame( $this->_object, $result );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testAddAttachment()
 	{
-		$result = $this->_object->addAttachment( 'test', 'text/plain', 'test.txt', 'inline' );
-		$this->assertSame( $this->_object, $result );
+		$result = $this->object->addAttachment( 'test', 'text/plain', 'test.txt', 'inline' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testEmbedAttachment()
 	{
-		$result = $this->_object->embedAttachment( 'test', 'text/plain', 'test.txt' );
-		$this->_object->getObject();
+		$result = $this->object->embedAttachment( 'test', 'text/plain', 'test.txt' );
+		$this->object->getObject();
 
 		$this->assertInternalType( 'string', $result );
 	}
@@ -173,7 +173,7 @@ class MW_Mail_Message_Zend2Test extends MW_Unittest_Testcase
 
 	public function testGetObject()
 	{
-		$this->assertInstanceOf( 'Zend\Mail\Message', $this->_object->getObject() );
+		$this->assertInstanceOf( 'Zend\Mail\Message', $this->object->getObject() );
 	}
 
 

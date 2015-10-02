@@ -16,7 +16,7 @@
  */
 class MW_Mail_Zend2 implements MW_Mail_Interface
 {
-	private $_transport;
+	private $transport;
 
 
 	/**
@@ -26,7 +26,7 @@ class MW_Mail_Zend2 implements MW_Mail_Interface
 	 */
 	public function __construct( Zend\Mail\Transport\TransportInterface $transport )
 	{
-		$this->_transport = $transport;
+		$this->transport = $transport;
 	}
 
 
@@ -49,7 +49,7 @@ class MW_Mail_Zend2 implements MW_Mail_Interface
 	 */
 	public function send( MW_Mail_Message_Interface $message )
 	{
-		$this->_transport->send( $message->getObject() );
+		$this->transport->send( $message->getObject() );
 	}
 
 
@@ -58,7 +58,7 @@ class MW_Mail_Zend2 implements MW_Mail_Interface
 	 */
 	public function __clone()
 	{
-		$this->_object = clone $this->_object;
-		$this->_transport = clone $this->_transport;
+		$this->object = clone $this->object;
+		$this->transport = clone $this->transport;
 	}
 }

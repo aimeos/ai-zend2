@@ -16,7 +16,7 @@
  */
 class MW_Logger_Zend2 extends MW_Logger_Abstract implements MW_Logger_Interface
 {
-	private $_logger = null;
+	private $logger = null;
 
 
 	/**
@@ -26,7 +26,7 @@ class MW_Logger_Zend2 extends MW_Logger_Abstract implements MW_Logger_Interface
 	 */
 	public function __construct( Zend\Log\Logger $logger )
 	{
-		$this->_logger = $logger;
+		$this->logger = $logger;
 	}
 
 
@@ -47,7 +47,7 @@ class MW_Logger_Zend2 extends MW_Logger_Abstract implements MW_Logger_Interface
 				$message = json_encode( $message );
 			}
 
-			$this->_logger->log( $priority, '<' . $facility . '> ' . $message );
+			$this->logger->log( $priority, '<' . $facility . '> ' . $message );
 		}
 		catch( Zend\Log\Exception\InvalidArgumentException $ze )	{
 			throw new MW_Logger_Exception( $ze->getMessage() );

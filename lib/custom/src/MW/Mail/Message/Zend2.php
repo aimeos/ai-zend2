@@ -16,12 +16,12 @@
  */
 class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 {
-	private $_html;
-	private $_text;
-	private $_object;
-	private $_charset;
-	private $_attach = array();
-	private $_embedded = array();
+	private $html;
+	private $text;
+	private $object;
+	private $charset;
+	private $attach = array();
+	private $embedded = array();
 
 
 	/**
@@ -31,7 +31,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function __construct( Zend\Mail\Message $object, $charset = 'UTF-8' )
 	{
-		$this->_object = $object;
+		$this->object = $object;
 	}
 
 
@@ -44,7 +44,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function addFrom( $email, $name = null )
 	{
-		$this->_object->setFrom( $email, $name );
+		$this->object->setFrom( $email, $name );
 		return $this;
 	}
 
@@ -58,7 +58,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function addTo( $email, $name = null )
 	{
-		$this->_object->addTo( $email, $name );
+		$this->object->addTo( $email, $name );
 		return $this;
 	}
 
@@ -72,7 +72,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function addCc( $email, $name = null )
 	{
-		$this->_object->addCc( $email, $name );
+		$this->object->addCc( $email, $name );
 		return $this;
 	}
 
@@ -86,7 +86,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function addBcc( $email, $name = null )
 	{
-		$this->_object->addBcc( $email, $name );
+		$this->object->addBcc( $email, $name );
 		return $this;
 	}
 
@@ -100,7 +100,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function addReplyTo( $email, $name = null )
 	{
-		$this->_object->setReplyTo( $email, $name );
+		$this->object->setReplyTo( $email, $name );
 		return $this;
 	}
 
@@ -114,7 +114,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function addHeader( $name, $value )
 	{
-		$this->_object->getHeaders()->addHeaderLine( $name, $value );
+		$this->object->getHeaders()->addHeaderLine( $name, $value );
 		return $this;
 	}
 
@@ -128,7 +128,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function setSender( $email, $name = null )
 	{
-		$this->_object->setFrom( $email, $name );
+		$this->object->setFrom( $email, $name );
 		return $this;
 	}
 
@@ -141,7 +141,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function setSubject( $subject )
 	{
-		$this->_object->setSubject( $subject );
+		$this->object->setSubject( $subject );
 		return $this;
 	}
 
@@ -156,11 +156,11 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	{
 		$part = new Zend\Mime\Part( $message );
 
-		$part->charset = $this->_charset;
+		$part->charset = $this->charset;
 		$part->encoding = Zend\Mime\Mime::ENCODING_QUOTEDPRINTABLE;
 		$part->type = Zend\Mime\Mime::TYPE_TEXT;
 
-		$this->_text = $part;
+		$this->text = $part;
 		return $this;
 	}
 
@@ -175,12 +175,12 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	{
 		$part = new Zend\Mime\Part( $message );
 
-		$part->charset = $this->_charset;
+		$part->charset = $this->charset;
 		$part->encoding = Zend\Mime\Mime::ENCODING_QUOTEDPRINTABLE;
 		$part->disposition = Zend\Mime\Mime::DISPOSITION_INLINE;
 		$part->type = Zend\Mime\Mime::TYPE_HTML;
 
-		$this->_html = $part;
+		$this->html = $part;
 		return $this;
 	}
 
@@ -203,7 +203,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 		$part->filename = $filename;
 		$part->type = $mimetype;
 
-		$this->_attach[] = $part;
+		$this->attach[] = $part;
 
 		return $this;
 	}
@@ -222,7 +222,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 		$cnt = 0;
 		$newfile = $filename;
 
-		while( isset( $this->_embedded[$newfile] ) ) {
+		while( isset( $this->embedded[$newfile] ) ) {
 			$newfile = ++$cnt . '_' . $filename;
 		}
 
@@ -234,7 +234,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 		$part->type = $mimetype;
 		$part->id = md5( $newfile . mt_rand() );
 
-		$this->_embedded[$newfile] = $part;
+		$this->embedded[$newfile] = $part;
 
 		return 'cid:' . $part->id;
 	}
@@ -249,29 +249,29 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	{
 		$msgparts = $parts = array();
 
-		if( !empty( $this->_embedded ) )
+		if( !empty( $this->embedded ) )
 		{
 			$type = Zend\Mime\Mime::MULTIPART_RELATED;
 
-			if( $this->_html != null ) {
-				$parts[] = $this->_createContainer( array_merge( array( $this->_html ), $this->_embedded ), $type );
+			if( $this->html != null ) {
+				$parts[] = $this->createContainer( array_merge( array( $this->html ), $this->embedded ), $type );
 			} else {
-				$parts[] = $this->_createContainer( $this->_embedded, $type );
+				$parts[] = $this->createContainer( $this->embedded, $type );
 			}
 		}
-		else if( $this->_html != null )
+		else if( $this->html != null )
 		{
-			$parts[] = $this->_html;
+			$parts[] = $this->html;
 		}
 
-		if( $this->_text !== null ) {
-			$parts[] = $this->_text;
+		if( $this->text !== null ) {
+			$parts[] = $this->text;
 		}
 
 		if( count( $parts ) === 2 )
 		{
 			$type = Zend\Mime\Mime::MULTIPART_ALTERNATIVE;
-			$msgparts = array( $this->_createContainer( array_reverse( $parts ), $type ) );
+			$msgparts = array( $this->createContainer( array_reverse( $parts ), $type ) );
 		}
 		else if( !empty( $parts ) )
 		{
@@ -279,11 +279,11 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 		}
 
 		$msg = new Zend\Mime\Message();
-		$msg->setParts( array_merge( $msgparts, $this->_attach ) );
+		$msg->setParts( array_merge( $msgparts, $this->attach ) );
 
-		$this->_object->setBody( $msg );
+		$this->object->setBody( $msg );
 
-		return $this->_object;
+		return $this->object;
 	}
 
 
@@ -292,7 +292,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	public function __clone()
 	{
-		$this->_object = clone $this->_object;
+		$this->object = clone $this->object;
 	}
 
 
@@ -303,7 +303,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 * @param string $type Mime type, e.g. "multipart/related" or "multipart/alternative"
 	 * @return \Zend\Mime\Part Container mime object
 	 */
-	protected function _createContainer( array $parts, $type )
+	protected function createContainer( array $parts, $type )
 	{
 		$msg = new Zend\Mime\Message();
 		$msg->setParts( $parts );
