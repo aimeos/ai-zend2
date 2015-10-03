@@ -9,7 +9,7 @@
 /**
  * Test class for MW_View_Helper_Url_Zend2.
  */
-class MW_View_Helper_Url_Zend2Test extends MW_Unittest_Testcase
+class MW_View_Helper_Url_Zend2Test extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $router;

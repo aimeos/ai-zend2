@@ -9,7 +9,7 @@
 /**
  * Test class for MW_Config_Zend2.
  */
-class MW_Config_Zend2Test extends MW_Unittest_Testcase
+class MW_Config_Zend2Test extends PHPUnit_Framework_TestCase
 {
 	private $object;
 
