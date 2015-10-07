@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Url;
+
+
 /**
- * Test class for MW_View_Helper_Url_Zend2.
+ * Test class for \Aimeos\MW\View\Helper\Url\Zend2.
  */
-class MW_View_Helper_Url_Zend2Test extends PHPUnit_Framework_TestCase
+class Zend2Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $router;
@@ -27,10 +30,10 @@ class MW_View_Helper_Url_Zend2Test extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped( '\Zend\Mvc\Router\Http\Wildcard is not available' );
 		}
 
-		$view = new MW_View_Default();
+		$view = new \Aimeos\MW\View\Standard();
 		$this->router = $this->getMock( '\Zend\Mvc\Router\Http\Wildcard' );
 
-		$this->object = new MW_View_Helper_Url_Zend2( $view, $this->router, 'https://localhost:80' );
+		$this->object = new \Aimeos\MW\View\Helper\Url\Zend2( $view, $this->router, 'https://localhost:80' );
 	}
 
 

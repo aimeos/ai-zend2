@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Mail\Message;
+
+
 /**
  * Zend implementation for creating e-mails.
  *
  * @package MW
  * @subpackage Mail
  */
-class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
+class Zend2 implements \Aimeos\MW\Mail\Message\Iface
 {
 	private $html;
 	private $text;
@@ -27,9 +30,9 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	/**
 	 * Initializes the message instance.
 	 *
-	 * @param Zend\Mail\Message $object Zend mail object
+	 * @param \Zend\Mail\Message $object Zend mail object
 	 */
-	public function __construct( Zend\Mail\Message $object, $charset = 'UTF-8' )
+	public function __construct( \Zend\Mail\Message $object, $charset = 'UTF-8' )
 	{
 		$this->object = $object;
 	}
@@ -40,7 +43,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Source e-mail address
 	 * @param string|null $name Name of the user sending the e-mail or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addFrom( $email, $name = null )
 	{
@@ -54,7 +57,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Destination address of the target mailbox
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addTo( $email, $name = null )
 	{
@@ -68,7 +71,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Destination address for a copy
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addCc( $email, $name = null )
 	{
@@ -82,7 +85,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Destination address for a hidden copy
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addBcc( $email, $name = null )
 	{
@@ -96,7 +99,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email E-mail address which should receive all replies
 	 * @param string|null $name Name of the user which should receive all replies or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addReplyTo( $email, $name = null )
 	{
@@ -110,7 +113,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $name Name of the custom e-mail header
 	 * @param string $value Text content of the custom e-mail header
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addHeader( $name, $value )
 	{
@@ -124,7 +127,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Source e-mail address
 	 * @param string|null $name Name of the user who sent the message or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function setSender( $email, $name = null )
 	{
@@ -137,7 +140,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 * Sets the subject of the message.
 	 *
 	 * @param string $subject Subject of the message
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function setSubject( $subject )
 	{
@@ -150,15 +153,15 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 * Sets the text body of the message.
 	 *
 	 * @param string $message Text body of the message
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function setBody( $message )
 	{
-		$part = new Zend\Mime\Part( $message );
+		$part = new \Zend\Mime\Part( $message );
 
 		$part->charset = $this->charset;
-		$part->encoding = Zend\Mime\Mime::ENCODING_QUOTEDPRINTABLE;
-		$part->type = Zend\Mime\Mime::TYPE_TEXT;
+		$part->encoding = \Zend\Mime\Mime::ENCODING_QUOTEDPRINTABLE;
+		$part->type = \Zend\Mime\Mime::TYPE_TEXT;
 
 		$this->text = $part;
 		return $this;
@@ -169,16 +172,16 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 * Sets the HTML body of the message.
 	 *
 	 * @param string $message HTML body of the message
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function setBodyHtml( $message )
 	{
-		$part = new Zend\Mime\Part( $message );
+		$part = new \Zend\Mime\Part( $message );
 
 		$part->charset = $this->charset;
-		$part->encoding = Zend\Mime\Mime::ENCODING_QUOTEDPRINTABLE;
-		$part->disposition = Zend\Mime\Mime::DISPOSITION_INLINE;
-		$part->type = Zend\Mime\Mime::TYPE_HTML;
+		$part->encoding = \Zend\Mime\Mime::ENCODING_QUOTEDPRINTABLE;
+		$part->disposition = \Zend\Mime\Mime::DISPOSITION_INLINE;
+		$part->type = \Zend\Mime\Mime::TYPE_HTML;
 
 		$this->html = $part;
 		return $this;
@@ -192,13 +195,13 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
 	 * @param string|null $filename Name of the attached file (or null if inline disposition is used)
 	 * @param string $disposition Type of the disposition ("attachment" or "inline")
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addAttachment( $data, $mimetype, $filename, $disposition = 'attachment' )
 	{
-		$part = new Zend\Mime\Part( $data );
+		$part = new \Zend\Mime\Part( $data );
 
-		$part->encoding = Zend\Mime\Mime::ENCODING_BASE64;
+		$part->encoding = \Zend\Mime\Mime::ENCODING_BASE64;
 		$part->disposition = $disposition;
 		$part->filename = $filename;
 		$part->type = $mimetype;
@@ -226,10 +229,10 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 			$newfile = ++$cnt . '_' . $filename;
 		}
 
-		$part = new Zend\Mime\Part( $data );
+		$part = new \Zend\Mime\Part( $data );
 
-		$part->disposition = Zend\Mime\Mime::DISPOSITION_INLINE;
-		$part->encoding = Zend\Mime\Mime::ENCODING_BASE64;
+		$part->disposition = \Zend\Mime\Mime::DISPOSITION_INLINE;
+		$part->encoding = \Zend\Mime\Mime::ENCODING_BASE64;
 		$part->filename = $newfile;
 		$part->type = $mimetype;
 		$part->id = md5( $newfile . mt_rand() );
@@ -251,7 +254,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 
 		if( !empty( $this->embedded ) )
 		{
-			$type = Zend\Mime\Mime::MULTIPART_RELATED;
+			$type = \Zend\Mime\Mime::MULTIPART_RELATED;
 
 			if( $this->html != null ) {
 				$parts[] = $this->createContainer( array_merge( array( $this->html ), $this->embedded ), $type );
@@ -270,7 +273,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 
 		if( count( $parts ) === 2 )
 		{
-			$type = Zend\Mime\Mime::MULTIPART_ALTERNATIVE;
+			$type = \Zend\Mime\Mime::MULTIPART_ALTERNATIVE;
 			$msgparts = array( $this->createContainer( array_reverse( $parts ), $type ) );
 		}
 		else if( !empty( $parts ) )
@@ -278,7 +281,7 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 			$msgparts = $parts;
 		}
 
-		$msg = new Zend\Mime\Message();
+		$msg = new \Zend\Mime\Message();
 		$msg->setParts( array_merge( $msgparts, $this->attach ) );
 
 		$this->object->setBody( $msg );
@@ -305,12 +308,12 @@ class MW_Mail_Message_Zend2 implements MW_Mail_Message_Interface
 	 */
 	protected function createContainer( array $parts, $type )
 	{
-		$msg = new Zend\Mime\Message();
+		$msg = new \Zend\Mime\Message();
 		$msg->setParts( $parts );
 
-		$part = new Zend\Mime\Part( $msg->generateMessage() );
+		$part = new \Zend\Mime\Part( $msg->generateMessage() );
 
-		$part->encoding = Zend\Mime\Mime::ENCODING_8BIT;
+		$part->encoding = \Zend\Mime\Mime::ENCODING_8BIT;
 		$part->boundary = $msg->getMime()->boundary();
 		$part->disposition = null;
 		$part->charset = null;

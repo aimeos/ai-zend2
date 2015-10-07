@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Logger;
+
+
 /**
  * Log messages using Zend\Log.
  *
  * @package MW
  * @subpackage Logger
  */
-class MW_Logger_Zend2 extends MW_Logger_Abstract implements MW_Logger_Interface
+class Zend2 extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 {
 	private $logger = null;
 
@@ -22,9 +25,9 @@ class MW_Logger_Zend2 extends MW_Logger_Abstract implements MW_Logger_Interface
 	/**
 	 * Initializes the logger object.
 	 *
-	 * @param Zend\Log\Logger $logger Zend logger object
+	 * @param \Zend\Log\Logger $logger Zend logger object
 	 */
-	public function __construct( Zend\Log\Logger $logger )
+	public function __construct( \Zend\Log\Logger $logger )
 	{
 		$this->logger = $logger;
 	}
@@ -36,10 +39,10 @@ class MW_Logger_Zend2 extends MW_Logger_Abstract implements MW_Logger_Interface
 	 * @param string $message Message text that should be written to the log facility
 	 * @param integer $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @throws MW_Logger_Exception If an error occurs in Zend_Log
-	 * @see MW_Logger_Abstract for available log level constants
+	 * @throws \Aimeos\MW\Logger\Exception If an error occurs in Zend_Log
+	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
+	public function log( $message, $priority = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
 	{
 		try
 		{
@@ -49,11 +52,11 @@ class MW_Logger_Zend2 extends MW_Logger_Abstract implements MW_Logger_Interface
 
 			$this->logger->log( $priority, '<' . $facility . '> ' . $message );
 		}
-		catch( Zend\Log\Exception\InvalidArgumentException $ze )	{
-			throw new MW_Logger_Exception( $ze->getMessage() );
+		catch( \Zend\Log\Exception\InvalidArgumentException $ze )	{
+			throw new \Aimeos\MW\Logger\Exception( $ze->getMessage() );
 		}
-		catch( Zend\Log\Exception\RuntimeException $ze )	{
-			throw new MW_Logger_Exception( $ze->getMessage() );
+		catch( \Zend\Log\Exception\RuntimeException $ze )	{
+			throw new \Aimeos\MW\Logger\Exception( $ze->getMessage() );
 		}
 	}
 }

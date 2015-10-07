@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\Mail\Message;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2014
  */
-
-
-class MW_Mail_Message_Zend2Test extends PHPUnit_Framework_TestCase
+class Zend2Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;
@@ -25,7 +26,7 @@ class MW_Mail_Message_Zend2Test extends PHPUnit_Framework_TestCase
 		}
 
 		$this->mock = $this->getMock( 'Zend\Mail\Message' );
-		$this->object = new MW_Mail_Message_Zend2( $this->mock, 'UTF-8' );
+		$this->object = new \Aimeos\MW\Mail\Message\Zend2( $this->mock, 'UTF-8' );
 	}
 
 	/**
@@ -160,7 +161,7 @@ class MW_Mail_Message_Zend2Test extends PHPUnit_Framework_TestCase
 
 	public function testEmbedAttachmentMultiple()
 	{
-		$object = new MW_Mail_Message_Zend2( new Zend\Mail\Message() );
+		$object = new \Aimeos\MW\Mail\Message\Zend2( new \Zend\Mail\Message() );
 
 		$object->setBody( 'text body' );
 		$object->embedAttachment( 'test', 'text/plain', 'test.txt' );
@@ -179,7 +180,7 @@ class MW_Mail_Message_Zend2Test extends PHPUnit_Framework_TestCase
 
 	public function testGenerateMailAlternative()
 	{
-		$object = new MW_Mail_Message_Zend2( new Zend\Mail\Message() );
+		$object = new \Aimeos\MW\Mail\Message\Zend2( new \Zend\Mail\Message() );
 
 		$object->setBody( 'text body' );
 		$object->setBodyHtml( 'html body' );
@@ -191,7 +192,7 @@ class MW_Mail_Message_Zend2Test extends PHPUnit_Framework_TestCase
 
 	public function testGenerateMailRelated()
 	{
-		$object = new MW_Mail_Message_Zend2( new Zend\Mail\Message() );
+		$object = new \Aimeos\MW\Mail\Message\Zend2( new \Zend\Mail\Message() );
 
 		$object->embedAttachment( 'embedded-data', 'text/plain', 'embedded.txt' );
 		$object->setBodyHtml( 'html body' );
@@ -203,7 +204,7 @@ class MW_Mail_Message_Zend2Test extends PHPUnit_Framework_TestCase
 
 	public function testGenerateMailFull()
 	{
-		$object = new MW_Mail_Message_Zend2( new Zend\Mail\Message() );
+		$object = new \Aimeos\MW\Mail\Message\Zend2( new \Zend\Mail\Message() );
 
 		$object->addAttachment( 'attached-data', 'text/plain', 'attached.txt' );
 		$object->embedAttachment( 'embedded-data', 'text/plain', 'embedded.txt' );

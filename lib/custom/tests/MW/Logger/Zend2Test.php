@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Logger;
+
+
 /**
- * Test class for MW_Logger_Zend2.
+ * Test class for \Aimeos\MW\Logger\Zend2.
  */
-class MW_Logger_Zend2Test extends PHPUnit_Framework_TestCase
+class Zend2Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -26,18 +29,18 @@ class MW_Logger_Zend2Test extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Class Zend\Log\Logger not found' );
 		}
 
-		$writer = new Zend\Log\Writer\Stream( 'error.log' );
+		$writer = new \Zend\Log\Writer\Stream( 'error.log' );
 
-		$formatter = new Zend\Log\Formatter\Simple( 'log: %message%' . PHP_EOL );
+		$formatter = new \Zend\Log\Formatter\Simple( 'log: %message%' . PHP_EOL );
 		$writer->setFormatter( $formatter );
 
-		$filter = new Zend\Log\Filter\Priority( Zend\Log\Logger::INFO );
+		$filter = new \Zend\Log\Filter\Priority( \Zend\Log\Logger::INFO );
 		$writer->addFilter( $filter );
 
-		$logger = new Zend\Log\Logger();
+		$logger = new \Zend\Log\Logger();
 		$logger->addWriter( $writer );
 
-		$this->object = new MW_Logger_Zend2( $logger );
+		$this->object = new \Aimeos\MW\Logger\Zend2( $logger );
 	}
 
 
@@ -69,14 +72,14 @@ class MW_Logger_Zend2Test extends PHPUnit_Framework_TestCase
 
 	public function testLogDebug()
 	{
-		$this->object->log( 'debug', MW_Logger_Abstract::DEBUG );
+		$this->object->log( 'debug', \Aimeos\MW\Logger\Base::DEBUG );
 		$this->assertEquals( '', file_get_contents( 'error.log' ) );
 	}
 
 
 	public function testBadPriority()
 	{
-		$this->setExpectedException( 'MW_Logger_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Logger\\Exception' );
 		$this->object->log( 'error', -1 );
 	}
 }

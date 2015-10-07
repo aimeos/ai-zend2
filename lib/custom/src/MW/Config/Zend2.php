@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Config;
+
+
 /**
  * Configuration setting class using ZF2 Config
  *
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Zend2
-	extends MW_Config_Abstract
-	implements MW_Config_Interface
+class Zend2
+	extends \Aimeos\MW\Config\Base
+	implements \Aimeos\MW\Config\Iface
 {
 	private $config;
 	private $paths;
@@ -25,10 +28,10 @@ class MW_Config_Zend2
 	/**
 	 * Initialize config object with ZF2 Config instance
 	 *
-	 * @param Zend\Config\Config $config Configuration object
+	 * @param \Zend\Config\Config $config Configuration object
 	 * @param array|string $path Filesystem path or list of paths to the configuration files
 	 */
-	public function __construct( Zend\Config\Config $config, $path = array() )
+	public function __construct( \Zend\Config\Config $config, $path = array() )
 	{
 		$this->config = $config;
 		$this->paths = (array) $path;
@@ -88,10 +91,10 @@ class MW_Config_Zend2
 		{
 			$val = $config->get( $parts[$i] );
 
-			if( $val instanceof Zend\Config\Config ) {
+			if( $val instanceof \Zend\Config\Config ) {
 				$config = $val;
 			} else {
-				$config = $config->{$parts[$i]} = new Zend\Config\Config( array(), true );
+				$config = $config->{$parts[$i]} = new \Zend\Config\Config( array(), true );
 			}
 		}
 
@@ -106,11 +109,11 @@ class MW_Config_Zend2
 	 * @param array $parts List of config name parts to look for
 	 * @return mixed Found value or null if no value is available
 	 */
-	protected function getPart( Zend\Config\Config $config, array $parts )
+	protected function getPart( \Zend\Config\Config $config, array $parts )
 	{
 		if( ( $key = array_shift( $parts ) ) !== null && isset( $config->$key ) )
 		{
-			if( $config->$key instanceof Zend\Config\Config )
+			if( $config->$key instanceof \Zend\Config\Config )
 			{
 				if( count( $parts  ) > 0 ) {
 					return $this->getPart( $config->$key, $parts );
@@ -133,7 +136,7 @@ class MW_Config_Zend2
 	 * @param string $path Path to the configuration directory
 	 * @param array $parts List of config name parts to look for
 	 */
-	protected function load( Zend\Config\Config $config, $path, array $parts )
+	protected function load( \Zend\Config\Config $config, $path, array $parts )
 	{
 		if( ( $key = array_shift( $parts ) ) !== null )
 		{
@@ -142,7 +145,7 @@ class MW_Config_Zend2
 			if( is_dir( $newPath ) )
 			{
 				if( !isset( $config->$key ) ) {
-					$config->$key = new Zend\Config\Config( array(), true );
+					$config->$key = new \Zend\Config\Config( array(), true );
 				}
 
 				$this->load( $config->$key, $newPath, $parts );
@@ -151,10 +154,10 @@ class MW_Config_Zend2
 			if( file_exists( $newPath . '.php' ) )
 			{
 				if( !isset( $config->$key ) ) {
-					$config->$key = new Zend\Config\Config( array(), true );
+					$config->$key = new \Zend\Config\Config( array(), true );
 				}
 
-				$config->$key->merge( new Zend\Config\Config( $this->includeFile( $newPath . '.php' ), true ) );
+				$config->$key->merge( new \Zend\Config\Config( $this->includeFile( $newPath . '.php' ), true ) );
 			}
 		}
 	}

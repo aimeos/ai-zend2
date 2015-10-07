@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Perf\Config;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2014
  */
-
-class Perf_Config_Zend2Test extends PHPUnit_Framework_TestCase
+class Zend2Test extends \PHPUnit_Framework_TestCase
 {
 	public function testZend2()
 	{
@@ -23,7 +25,7 @@ class Perf_Config_Zend2Test extends PHPUnit_Framework_TestCase
 
 		for( $i = 0; $i < 1000; $i++ )
 		{
-			$conf = new MW_Config_Zend( new Zend\Config\Config( array(), true ), $paths );
+			$conf = new \Aimeos\MW\Config\Zend( new Zend\Config\Config( array(), true ), $paths );
 
 			$conf->get( 'test/db/host' );
 			$conf->get( 'test/db/username' );
