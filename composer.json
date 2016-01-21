@@ -13,10 +13,10 @@
 	},
 	"require": {
 		"php": ">=5.3.3",
-		"zendframework/zend-config": "2.3.*",
-		"zendframework/zend-log": "2.3.*",
-		"zendframework/zend-mail": "2.3.*",
-		"zendframework/zend-mvc": "2.3.*",
+		"zendframework/zend-config": "~2.3",
+		"zendframework/zend-log": "~2.3",
+		"zendframework/zend-mail": "~2.3",
+		"zendframework/zend-mvc": "~2.3",
 		"composer/installers": "~1.0"
 	},
 	"autoload": {
