@@ -25,7 +25,7 @@ class Zend2Test extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Zend\Mail\Message is not available' );
 		}
 
-		$this->mock = $this->getMock( 'Zend\Mail\Message' );
+		$this->mock = $this->getMockBuilder( 'Zend\Mail\Message' )->getMock();
 		$this->object = new \Aimeos\MW\Mail\Message\Zend2( $this->mock, 'UTF-8' );
 	}
 

@@ -31,7 +31,7 @@ class Zend2Test extends \PHPUnit_Framework_TestCase
 		}
 
 		$view = new \Aimeos\MW\View\Standard();
-		$this->router = $this->getMock( '\Zend\Mvc\Router\Http\Wildcard' );
+		$this->router = $this->getMockBuilder( '\Zend\Mvc\Router\Http\Wildcard' )->getMock();
 
 		$this->object = new \Aimeos\MW\View\Helper\Url\Zend2( $view, $this->router, 'https://localhost:80' );
 	}
