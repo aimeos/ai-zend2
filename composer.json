@@ -13,7 +13,7 @@
 	},
 	"require": {
 		"php": ">=5.3.3",
-		"aimeos/aimeos-core": "dev-master",
+		"aimeos/aimeos-core": "~2017.01",
 		"zendframework/zend-config": "~2.3",
 		"zendframework/zend-log": "~2.3",
 		"zendframework/zend-mail": "~2.3",
