@@ -23,8 +23,8 @@ class Zend2 implements \Aimeos\MW\Mail\Message\Iface
 	private $text;
 	private $object;
 	private $charset;
-	private $attach = array();
-	private $embedded = array();
+	private $attach = [];
+	private $embedded = [];
 
 
 	/**
@@ -250,7 +250,7 @@ class Zend2 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function getObject()
 	{
-		$msgparts = $parts = array();
+		$msgparts = $parts = [];
 
 		if( !empty( $this->embedded ) )
 		{

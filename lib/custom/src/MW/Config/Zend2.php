@@ -31,7 +31,7 @@ class Zend2
 	 * @param \Zend\Config\Config $config Configuration object
 	 * @param array|string $path Filesystem path or list of paths to the configuration files
 	 */
-	public function __construct( \Zend\Config\Config $config, $path = array() )
+	public function __construct( \Zend\Config\Config $config, $path = [] )
 	{
 		$this->config = $config;
 		$this->paths = (array) $path;
@@ -94,7 +94,7 @@ class Zend2
 			if( $val instanceof \Zend\Config\Config ) {
 				$config = $val;
 			} else {
-				$config = $config->{$parts[$i]} = new \Zend\Config\Config( array(), true );
+				$config = $config->{$parts[$i]} = new \Zend\Config\Config( [], true );
 			}
 		}
 
@@ -145,7 +145,7 @@ class Zend2
 			if( is_dir( $newPath ) )
 			{
 				if( !isset( $config->$key ) ) {
-					$config->$key = new \Zend\Config\Config( array(), true );
+					$config->$key = new \Zend\Config\Config( [], true );
 				}
 
 				$this->load( $config->$key, $newPath, $parts );
@@ -154,7 +154,7 @@ class Zend2
 			if( file_exists( $newPath . '.php' ) )
 			{
 				if( !isset( $config->$key ) ) {
-					$config->$key = new \Zend\Config\Config( array(), true );
+					$config->$key = new \Zend\Config\Config( [], true );
 				}
 
 				$config->$key->merge( new \Zend\Config\Config( $this->includeFile( $newPath . '.php' ), true ) );
