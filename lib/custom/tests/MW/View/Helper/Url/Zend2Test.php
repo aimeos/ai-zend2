@@ -12,7 +12,7 @@ namespace Aimeos\MW\View\Helper\Url;
 /**
  * Test class for \Aimeos\MW\View\Helper\Url\Zend2.
  */
-class Zend2Test extends \PHPUnit_Framework_TestCase
+class Zend2Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $router;
