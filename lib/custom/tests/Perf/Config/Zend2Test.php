@@ -5,7 +5,7 @@ namespace Aimeos\Perf\Config;
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2014-2016
+ * @copyright Aimeos (aimeos.org), 2014-2017
  */
 class Zend2Test extends \PHPUnit\Framework\TestCase
 {
